@@ -255,7 +255,7 @@ $popup-width: 85%;
   position: fixed;
   right: 0;
   top: 44px;
-  bottom: 49px;
+  bottom: $bar-footer-height + $bar-padding-portrait;
   width: 20px;
   z-index: 2;
   text-align: center;

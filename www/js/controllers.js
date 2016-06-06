@@ -116,7 +116,7 @@ function($scope,$state,contactService,$ionicScrollDelegate,$window,$location){
   $scope.contacts_right_bar_swipe = function(e){
     var barHeight = $(".kingc-contacts-right-bar-inner").height(),
         lettersCount = $scope.validContactsFirstLetterList.length,
-        letter = $scope.validContactsFirstLetterList[parseInt(e.gesture.center.pageY / (barHeight / lettersCount + 2))-2];
+        letter = $scope.validContactsFirstLetterList[parseInt(e.gesture.center.pageY / (barHeight / (lettersCount + 2)))-3];
 
     $scope.isDragging = true;
     if($scope.previousLetter != letter){
@@ -138,15 +138,11 @@ function($scope,$state,contactService,$ionicScrollDelegate,$window,$location){
     return $scope.contactListCache[firstLetter];
   };
   $scope.scrollTo = function(letter){
-    //var o = $ionicScrollDelegate.getScrollPosition();
-    var topB = angular.element($window.document.getElementById("index-bar-B")).offset().top;
-    //console.log(angular.element($window.document.getElementById("index-bar-"+letter)).offset().top-topB);
     $location.hash("index-bar-"+letter);
     $ionicScrollDelegate.anchorScroll(false);
-    //$ionicScrollDelegate.scrollTop(true);
   };
-  $scope.scrollTop = function(){
-    $ionicScrollDelegate.scrollTop(true);
+  $scope.scrollEnd = function(isToTop){
+    isToTop ? $ionicScrollDelegate.scrollTop(true) : $ionicScrollDelegate.scrollBottom(false);
   };
 
 }])

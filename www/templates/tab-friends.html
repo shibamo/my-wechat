@@ -8,7 +8,7 @@
       <button class="button button-icon icon ion-person"></button>
     </div>
   </ion-header-bar>
-  <ion-content has-subheader="false" delegate-handle="mainScroll" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()" >
+  <ion-content has-subheader="false" delegate-handle="mainScroll" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()" scrollbar-y="false">
     <ion-list class="rj-list" role="others">
       <ion-item class="rj-item">
         <div class="rj-contacts-pic rj-orange-bgc">
@@ -51,10 +51,10 @@
   </ion-content>
   <div class="rj-contacts-right-bar" rj-position-middle on-drag="contacts_right_bar_swipe($event)" on-release="onRelease($event)" role="letter index bar" >
     <div class="kingc-contacts-right-bar-inner">
-      <div ng-click="scrollTop()">&uarr;</div>
+      <div ng-click="scrollEnd(true)">&uarr;</div>
       <div>☆</div>
       <div ng-repeat="letter in validContactsFirstLetterList"  ng-click="scrollTo(letter)">{{letter}}</div>
-      <div>#</div>
+      <div  ng-click="scrollEnd(false)">#</div>
     </div>
   </div>
   <div class="rj-contacts-middle-bar" ng-if="!!previousLetter && isDragging">
