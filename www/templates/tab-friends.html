@@ -1,0 +1,63 @@
+<ion-view view-title="fake-wechat">
+  <ion-header-bar align-title="center" class="bar-positive">
+    <div class="buttons">
+      <button class="button button-icon icon ion-chevron-left" ui-sref='tab.message'></button>
+    </div>
+    <div class="h1 title" ng-bind='"我的朋友 (" + getContactsCount() + ")"'></div>
+    <div class="buttons">
+      <button class="button button-icon icon ion-person"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content has-subheader="false" delegate-handle="mainScroll" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()" >
+    <ion-list class="rj-list" role="others">
+      <ion-item class="rj-item">
+        <div class="rj-contacts-pic rj-orange-bgc">
+          <i class="ion-person-add"></i>
+        </div>
+        <h2>新的朋友</h2>
+      </ion-item>
+      <ion-item class="rj-item">
+         <div class="rj-contacts-pic rj-green-bgc">
+            <i class="ion-person-stalker"></i>
+         </div>
+         <h2>群聊</h2>
+      </ion-item>
+      <ion-item class="rj-item">
+        <div class="rj-contacts-pic rj-blue-bgc">
+          <i class="ion-ios-pricetag"></i>
+        </div>
+        <h2>标签</h2>
+      </ion-item>
+      <ion-item class="rj-item">
+        <div class="rj-contacts-pic rj-blue-bgc">
+          <i class="ion-person-add"></i>
+        </div>
+        <h2>公众号</h2>
+      </ion-item>
+    </ion-list>  
+    <ion-list class="rj-contacts-item" role="contacts list">
+      <ion-item ng-repeat="letter in validContactsFirstLetterList">
+        <div class="rj-contacts-index-bar" id="index-bar-{{letter}}">{{letter}}</div>
+        <ion-list class="rj-list">
+          <ion-item class="rj-item" ng-repeat="contact in contactListCache[letter]">
+            <div class="rj-contacts-pic">
+              <img ng-src="{{contact.picture.thumbnail}}">
+            </div>
+            <h2>{{contact.login.username}} - {{contact.name.title}}.{{contact.name.first}}</h2>
+          </ion-item>
+        </ion-list>
+      </ion-item>
+     </ion-list>
+  </ion-content>
+  <div class="rj-contacts-right-bar" rj-position-middle on-drag="contacts_right_bar_swipe($event)" on-release="onRelease($event)" role="letter index bar" >
+    <div class="kingc-contacts-right-bar-inner">
+      <div ng-click="scrollTop()">&uarr;</div>
+      <div>☆</div>
+      <div ng-repeat="letter in validContactsFirstLetterList"  ng-click="scrollTo(letter)">{{letter}}</div>
+      <div>#</div>
+    </div>
+  </div>
+  <div class="rj-contacts-middle-bar" ng-if="!!previousLetter && isDragging">
+    {{previousLetter}}
+  </div>
+</ion-view>

@@ -1,0 +1,18 @@
+<ion-view>
+  <ion-header-bar class="bar-calm" align-title="center">
+    <button class="button button-icon icon ion-android-search no-animation icon-left">查找</button>
+    <div  class="h1 title">微信({{ noReadMessages() }})</div>
+      <button class="button button-icon icon ion-android-add no-animation">增加</button>
+  </ion-header-bar>
+  <ion-content on-swipe-left="onSwipeLeft()">
+    <ion-list rj-close-back-drop>
+      <ion-item class="item-avatar" ng-repeat="message in messages | orderBy:['isTop', 'lastMessage.timeFrome1970']:true" on-hold="popupMessageOptions(message)" ng-click="messageDetails(message)" rj-hold-active >
+        <img ng-src="{{message.pic}}">
+        <span class="rj-sm-red-icon " ng-show="message.showHints"><p ng-bind="message.noReadMessages"></p></span>
+        <h2 ng-bind="message.name"></h2>
+        <p class="rj-list-p" ng-bind="message.lastMessage.content"></p>
+        <span class="rj-push-right" ng-bind="message.lastMessage.time"></span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
